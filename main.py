@@ -6,6 +6,7 @@ import urllib.request as ur
 import os
 import modin.pandas as mpd
 import time
+import polyglot as pt
 start_time = time.time()
 
 
@@ -24,15 +25,23 @@ ds = pd.read_json(reviews, lines=True)
 """
 #pd.DataFrame.to_csv(ds, 'dataset.csv')
 pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 100)
-pd.set_option('display.width', 1000)
+pd.set_option('display.max_columns', 200)
+pd.set_option('display.width', 1200)
+pd.set_option('max_colwidth', None)
 ds = pd.read_csv('dataset.csv')
 
 #nds = ds[1::]
 
 del ds['N']
 ds.index +=1
-print(ds)
+
+ds_quests = ds['question']
+ds_answer = ds['answer']
+ds_relevance = ds['relevance']
+
+from polyglot.downloader import downloader
+print(downloader.supported_languages_table("sentiment2", 3))
+
 
 
 
