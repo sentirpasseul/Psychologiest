@@ -6,8 +6,9 @@ import urllib.request as ur
 import os
 import modin.pandas as mpd
 import time
-import polyglot as pt
+import pymorphy2
 start_time = time.time()
+morph = pymorphy2.MorphAnalyzer()
 
 
 #url = 'https://datasets-server.huggingface.co/first-rows?dataset=Den4ikAI%2Frussian_dialogues&config=Den4ikAI--russian_dialogues&split=train'
@@ -28,7 +29,7 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 200)
 pd.set_option('display.width', 1200)
 pd.set_option('max_colwidth', None)
-ds = pd.read_csv('dataset.csv')
+ds = pd.read_csv('dataset.csv')[0:30] #Временно указал 30 первых строчек, чтобы не убить процессор
 
 #nds = ds[1::]
 
@@ -39,10 +40,14 @@ ds_quests = ds['question']
 ds_answer = ds['answer']
 ds_relevance = ds['relevance']
 
-from polyglot.downloader import downloader
-print(downloader.supported_languages_table("sentiment2", 3))
+for row in ds_quests:
+        msg = str(row).split()
+        ar_parse = []
+        for word in range(len(msg)):
+            #ar_parse.append(w)
+            print(morph.parse(msg[word]))
 
-
+print(ds_quests.describe())
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
