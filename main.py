@@ -40,6 +40,10 @@ ds_quests = ds['question']
 ds_answer = ds['answer']
 ds_relevance = ds['relevance']
 
+res_quests, res_ans = [], []
+
+
+
 for row in ds_quests:
         msg = str(row).split()
         ar_parse = []
