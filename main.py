@@ -6,6 +6,8 @@ import urllib.request as ur
 import os
 import modin.pandas as mpd
 import time
+from transformers import pipeline
+import sentiment
 start_time = time.time()
 
 
@@ -32,8 +34,31 @@ ds = pd.read_csv('dataset.csv')
 
 del ds['N']
 ds.index +=1
-print(ds)
+#print(ds)
+
+qstns_list = ds['question'].tolist()
+answrs_list = ds['answer'].to_list()
+#print(type(answrs_list))
+#print(len(qstns_list))
 
 
+#print(answrs_list)
+q_neg, q_pos, q_neu = sentiment.tonality(qstns_list)
+a_neg, a_pos, a_neu = sentiment.tonality(answrs_list)
+
+
+#print(len(q_neg))
+#print(q_neu)
+#print(q_pos)
+#print(q_neg)
+
+#ds['q_neu'] = q_neu
+#ds['q_pos'] = q_pos
+#ds['q_neg'] = q_neg
+
+#print(ds)
+
+#ds.insert('question', q_neg, 'answer')
+#print(ds)
 
 print("--- %s seconds ---" % (time.time() - start_time))
