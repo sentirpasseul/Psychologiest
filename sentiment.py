@@ -56,13 +56,13 @@ def tonality(text_list: list):
         neg_list.append(neg)
 
 
-
+        """
         print(sentence, '\n',
              'neutral = ', neu, '\n',
              'positive = ', pos, '\n'
              'negative = ', neg, '\n'
              )
-
+        """
     return neg_list,neu_list,pos_list
 
 

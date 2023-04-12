@@ -34,7 +34,7 @@ ds = pd.read_csv('dataset.csv')
 
 del ds['N']
 ds.index +=1
-#print(ds)
+print(ds)
 
 qstns_list = ds['question'].tolist()
 answrs_list = ds['answer'].to_list()
@@ -56,7 +56,11 @@ a_neg, a_pos, a_neu = sentiment.tonality(answrs_list)
 #ds['q_pos'] = q_pos
 #ds['q_neg'] = q_neg
 
-#print(ds)
+#ds['a_neu'] = [a_neu]
+#ds['a_pos'] = [a_pos]
+#ds['a_neg'] = [a_neg]
+
+print(ds)
 
 #ds.insert('question', q_neg, 'answer')
 #print(ds)
