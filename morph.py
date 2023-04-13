@@ -1,13 +1,15 @@
 import pymorphy2
+import prepocess
 
 morph = pymorphy2.MorphAnalyzer()
 
 class MorphAnalyzer:
 
 
-    def getMorphSent(self, text: list):
-        self.text = text
+    def getMorphText(self, text: list):
+        self.text = prepocess.Preprocess().prepSent(text)
         self.text_morph = list()
+        sentence_morph = list()
         for sentence in self.text:
             sentence = sentence.split()
             for word in sentence:
@@ -16,9 +18,11 @@ class MorphAnalyzer:
                 else:
                     parts = morph.parse(word)[0]
                     part = parts.tag.cyr_repr
-                    self.text_morph.append(parts)
+                    #print(f"Для слова '{word}': {part}") #log
+                    sentence_morph.append(part)
+            self.text_morph.append(part)
 
         return self.text_morph
 
-m1 = MorphAnalyzer().getMorphSent(['Я люблю тебя', "Там стоит дерево"])
-print(m1)
+#m1 = MorphAnalyzer().getMorphSent(['Я люблю тебя', "Там стоит дерево"])
+#print(m1)

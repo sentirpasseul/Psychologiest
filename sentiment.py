@@ -6,6 +6,8 @@ import string
 import numpy as np
 from prepocess import Preprocess
 
+import pandas as pd
+
 fasttext.FastText.eprint = lambda x: None
 FastTextSocialNetworkModel.MODEL_PATH = 'src/fasttext-social-network-model.bin'
 
@@ -23,6 +25,11 @@ def getPos(sentiment):
 
 def getNeg(sentiment):
     return sentiment.get('negative')
+
+def getSeries(array: list):
+    return pd.Series(array)
+
+
 def tonality(text_list: list):
     #fasttext.FastText.eprint = lambda x: None
     FastTextSocialNetworkModel.MODEL_PATH = 'src/fasttext-social-network-model.bin'
@@ -63,6 +70,12 @@ def tonality(text_list: list):
              'negative = ', neg, '\n'
              )
         """
-    return neg_list,neu_list,pos_list
+    ds = pd.DataFrame()
+    ds['sentence'] = text_list
+    ds['neu_list'] = neu_list
+    ds['pos_list'] = pos_list
+    ds['neg_list'] = neg_list
+
+    return ds
 
 

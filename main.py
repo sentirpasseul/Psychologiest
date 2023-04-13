@@ -8,6 +8,7 @@ import modin.pandas as mpd
 import time
 from transformers import pipeline
 import sentiment
+import analyzer
 start_time = time.time()
 
 
@@ -34,19 +35,34 @@ ds = pd.read_csv('dataset.csv')
 
 del ds['N']
 ds.index +=1
-print(ds)
+#print(ds)
 
 qstns_list = ds['question'].tolist()
 answrs_list = ds['answer'].to_list()
+#print(answrs_list)
 #print(type(answrs_list))
 #print(len(qstns_list))
 
 
 #print(answrs_list)
-q_neg, q_pos, q_neu = sentiment.tonality(qstns_list)
-a_neg, a_pos, a_neu = sentiment.tonality(answrs_list)
+#q_ds = sentiment.tonality(qstns_list)
+#a_ds = sentiment.tonality(answrs_list)
 
+#q_ds.to_csv('src/q_ds.csv')
+#a_ds.to_csv('src/a_ds.csv')
 
+answrs_interj = analyzer.Analyzer().getInterj(answrs_list)
+qstns_interj = analyzer.Analyzer().getInterj(qstns_list)
+
+print(len(qstns_interj))
+
+#qstns_interj_ds = pd.DataFrame()
+#qstns_interj_ds['question'] = qstns_list
+#qstns_interj_ds['interj'] = qstns_interj
+
+#print(qstns_interj_ds)
+#print(q_ds)
+#print(a_ds)
 #print(len(q_neg))
 #print(q_neu)
 #print(q_pos)
@@ -60,7 +76,7 @@ a_neg, a_pos, a_neu = sentiment.tonality(answrs_list)
 #ds['a_pos'] = [a_pos]
 #ds['a_neg'] = [a_neg]
 
-print(ds)
+#print(ds)
 
 #ds.insert('question', q_neg, 'answer')
 #print(ds)
