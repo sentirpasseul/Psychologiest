@@ -12,10 +12,11 @@ class Analyzer:
     def getInterj(self, text_morph: list):
         text_morph = self.m_anlzr.getMorphText(text_morph)
         interj_list = list()
+        #print(len(text_morph))
         for sentence in text_morph:
-            print(sentence)
             sentence = sentence.split()
-            sentence = sentence[0].split(",")[0]
+            sentence = str(sentence[0].split(",")[0])
+            #print(sentence)
             if sentence == 'МЕЖД':
                 #print(f"В '{sentence}' есть междометие, записывается 1")
                 interj_list.append(1)
@@ -23,7 +24,7 @@ class Analyzer:
                 #print(f"В '{sentence}' нет междометия, записывается 0")
                 interj_list.append(0)
 
-        print(len(interj_list))
+        #print(len(interj_list))
         return interj_list
 
 

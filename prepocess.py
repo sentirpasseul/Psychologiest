@@ -9,11 +9,15 @@ class Preprocess:
         self.text_prep = list()
         for sent in self.text:
             if str(sent) == "nan":
-                pass
+                self.text_prep.append("0")
             else:
+                sent = sent.split()
+                sent = " ".join(sent)
                 sent = re.sub("[,@\'?\.$%_]", "", sent)
                 sent.lower()
                 self.text_prep.append(sent)
+        #print(self.text_prep)
         return self.text_prep
 
 
+#p1 = Preprocess().prepSent([' I love'])

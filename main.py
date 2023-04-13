@@ -45,20 +45,70 @@ answrs_list = ds['answer'].to_list()
 
 
 #print(answrs_list)
-#q_ds = sentiment.tonality(qstns_list)
-#a_ds = sentiment.tonality(answrs_list)
+q_ds = sentiment.tonality(qstns_list[130:140])
+a_ds = sentiment.tonality(answrs_list[130:140])
 
+
+#q_ds.reset_index()
+#del a_ds[0]
 #q_ds.to_csv('src/q_ds.csv')
 #a_ds.to_csv('src/a_ds.csv')
 
-answrs_interj = analyzer.Analyzer().getInterj(answrs_list)
-qstns_interj = analyzer.Analyzer().getInterj(qstns_list)
+#q_ds = pd.read_csv('src/q_ds.csv')
+#q_ds.drop('Unnamed', axis=1)
+#a_ds = pd.read_csv('src/a_ds.csv')
 
-print(len(qstns_interj))
+print('-'*50)
+print("Таблица тональности вопросов:")
+print('-'*50)
+print(q_ds)
+print('-'*50)
 
-#qstns_interj_ds = pd.DataFrame()
-#qstns_interj_ds['question'] = qstns_list
-#qstns_interj_ds['interj'] = qstns_interj
+print()
+print()
+
+print('-'*50)
+print("Таблица тональности ответов:")
+print('-'*50)
+print(a_ds)
+print('-'*50)
+
+answrs_interj = analyzer.Analyzer().getInterj(answrs_list[130:140])
+qstns_interj = analyzer.Analyzer().getInterj(qstns_list[130:140])
+
+
+def getFrequency(array: list):
+    return np.sum(array)
+
+freq_qstns = getFrequency(qstns_interj[130:140])
+freq_answrs = getFrequency(answrs_interj[130:140])
+
+#print(len(answrs_interj))
+
+qstns_interj_ds = pd.DataFrame()
+qstns_interj_ds['question'] = qstns_list
+qstns_interj_ds['intj'] = qstns_interj
+
+print('-'*50)
+print("Таблица междометий в вопросах")
+print('-'*50)
+print(qstns_interj_ds[0:30])
+print('-'*50)
+print("Частота встречаемости междометий:", freq_qstns)
+print('-'*50)
+print("\n"*3)
+
+answrs_interj_ds = pd.DataFrame()
+answrs_interj_ds['answer'] = answrs_list
+answrs_interj_ds['intj'] = answrs_interj
+print('-'*50)
+print("Таблица междометий в ответах")
+print(answrs_interj_ds[0:30])
+print('-'*50)
+print("Частота встречаемости междометий:", freq_answrs)
+print('-'*50)
+print("\n"*3)
+
 
 #print(qstns_interj_ds)
 #print(q_ds)

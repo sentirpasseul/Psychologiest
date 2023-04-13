@@ -11,9 +11,10 @@ class MorphAnalyzer:
         self.text_morph = list()
         sentence_morph = list()
         for sentence in self.text:
+            #print(sentence)
             sentence = sentence.split()
             for word in sentence:
-                if word == " ":
+                if str(word) == " ":
                     pass
                 else:
                     parts = morph.parse(word)[0]
